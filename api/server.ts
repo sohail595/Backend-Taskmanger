@@ -1,7 +1,7 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import app from "../src/app";
 
-// Serverless handler for Vercel
+// Vercel serverless handler
 export default function handler(req: VercelRequest, res: VercelResponse) {
   app(req, res);
 }
