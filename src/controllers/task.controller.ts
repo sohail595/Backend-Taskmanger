@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
 import Task from "../models/task.model";
-import path from "path";
-import fs from "fs";
 import cloudinary from "../config/Cloudinary";
 
 
@@ -108,13 +106,13 @@ export const deleteTask = async (req: Request, res: Response) => {
     }
 
     // 🗑 Delete image file if exists
-    if (task.image) {
-      const imagePath = path.join(process.cwd(), task.image);
+    // if (task.image) {
+    //   const imagePath = path.join(process.cwd(), task.image);
 
-      if (fs.existsSync(imagePath)) {
-        fs.unlinkSync(imagePath);
-      }
-    }
+    //   if (fs.existsSync(imagePath)) {
+    //     fs.unlinkSync(imagePath);
+    //   }
+    // }
 
     if (task.imagePublicId) {
   await cloudinary.uploader.destroy(task.imagePublicId);
