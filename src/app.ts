@@ -6,7 +6,7 @@ import path from "path";
 const app = express();
 
 app.use(cors());
-app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
+// app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 // ⚠️ JSON parser (for non-form-data routes)
 app.use(express.json());
 
