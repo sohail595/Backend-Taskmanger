@@ -7,6 +7,7 @@ import {
   deleteTask,
   updateTaskStatus,
   getcompletedTask,
+  updateTaskPriority,
 } from "../controllers/task.controller";
 import { upload } from "../middlewares/upload";
 
@@ -20,6 +21,7 @@ router.get("/:id", getTaskById);
 router.put("/:id", upload.single("image"), updateTask);
 router.delete("/:id", deleteTask);
 router.patch("/status/:id", updateTaskStatus);
+router.patch("/priority/:id", updateTaskPriority);
 
 
 export default router;
