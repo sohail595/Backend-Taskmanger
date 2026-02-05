@@ -142,6 +142,11 @@ export const deleteTask = async (req: Request, res: Response) => {
         if(!task)  return res.status(404).json ({message : "Task not found"});
 
         task.status =status;
+        if (status === "Completed") {
+      task.completedAt = new Date();
+    } else {
+      task.completedAt = null; // optional (if task reopened)
+    }
         await task.save();
 
         res.json({message : "Status Updated Successfully", task});
@@ -166,5 +171,30 @@ export const getcompletedTask = async (_req:Request, res:Response) => {
   } catch (error) {
     console.error("Get Completed Tasks Error", error);
     res.status(500).json({message : "Failed to fetch completed tasks"})
+  }
+};
+
+//  update only priority
+export const updateTaskPriority = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { priority } = req.body;
+
+    if (!priority) {
+      return res.status(400).json({ message: "Priority is required" });
+    }
+
+    const task = await Task.findById(id);
+    if (!task) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
+    task.priority = priority;
+    await task.save();
+
+    res.json({ message: "Priority updated successfully", task });
+  } catch (error) {
+    console.error("UPDATE PRIORITY ERROR:", error);
+    res.status(500).json({ message: "Failed to update priority" });
   }
 };
