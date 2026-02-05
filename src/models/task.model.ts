@@ -20,8 +20,15 @@ const taskSchema = new Schema(
     },
 
     image: { type: String },
-    imagePublicId: { type: String }
+    imagePublicId: { type: String },
+
+  completedAt: {
+  type: Date,
+  default: null,
+}
   },
+
+  
   { timestamps: true }
 );
 
